@@ -1,0 +1,77 @@
+---
+import Navbar from '@/components/Navbar'
+import { getLangFromUrl } from '../i18n/utils'
+import ToastProvider from '@/providers/ToastProvider'
+
+
+type Lang = 'id' | 'en'
+
+const lang: Lang = Astro.props?.lang === 'en'
+	? 'en'
+	: Astro.props?.lang === 'id'
+	? 'id'
+	: getLangFromUrl(Astro.url.pathname)
+
+const meta: Record<Lang, { title: string; description: string }> = {
+	id: {
+		title: 'Rendev Studio',
+		description:
+			'WebinStudio menyediakan solusi digital untuk membantu bisnis membangun website profesional, cepat, responsif, dan SEO-friendly.',
+	},
+	en: {
+		title: 'Rendev Studio',
+		description:
+			'WebinStudio provides digital solutions to help businesses build professional, fast, responsive, and SEO-friendly websites.',
+	},
+}
+
+const currentMeta = meta[lang]
+
+// Allow pages to override SEO: pass `title`, `description`, `noIndex`, `ogTitle`, `ogDescription` as props
+const pageTitle = Astro.props?.title ?? currentMeta.title
+const pageDescription = Astro.props?.description ?? currentMeta.description
+const noIndex = Astro.props?.noIndex ?? false
+const ogTitle = Astro.props?.ogTitle ?? pageTitle
+const ogDescription = Astro.props?.ogDescription ?? pageDescription
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="icon" href="/logo.png" />
+		<meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="author" content="WebinStudio" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={lang === 'id' ? 'id_ID' : 'en_US'} />
+
+		<!-- Per-page head slot: pages can inject custom meta tags using <Fragment slot="head">... </Fragment> -->
+		<slot name="head" />
+
+		<!-- Initialize theme before page render -->
+		<script is:inline>
+			const savedTheme = localStorage.getItem('theme')
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+			if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+				document.documentElement.classList.add('dark')
+			}
+		</script>
+
+		<!-- Save current language -->
+		<script is:inline>
+			localStorage.setItem('lang', '{lang}')
+		</script>
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-900">
+		 <ToastProvider client:load/>
+		<Navbar client:load lang={lang} />
+		<slot />
+	</body>
+</html>

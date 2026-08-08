@@ -1,0 +1,39 @@
+---
+import '../../../../public/global.css'
+import AboutLayout from '@/layouts/AboutLayout.astro'
+---
+
+<AboutLayout lang="en">
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-500 mb-4">Tentang Saya</h1>
+        <p class="text-lg text-muted-foreground mb-6">Saya adalah Rendy, seorang Full Stack Web Developer yang fokus pada pembuatan aplikasi web yang cepat, responsif, dan mudah digunakan. Saya bekerja dengan teknologi modern dan berpengalaman membangun antarmuka pengguna, API, dan integrasi layanan.</p>
+
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-sm font-semibold text-slate-400">Keahlian</h3>
+            <ul class="mt-2 flex flex-wrap gap-2">
+              <li class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-sm">React</li>
+              <li class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-sm">Astro</li>
+              <li class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-sm">Node.js</li>
+              <li class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-sm">TailwindCSS</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-slate-400">Pengalaman</h3>
+            <p class="mt-2 text-sm text-muted-foreground">Berpengalaman mengerjakan proyek freelance dan produk internal, mulai dari prototyping hingga deployment.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="flex justify-center lg:justify-end">
+        <div class="relative w-72 h-72 rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-sky-500/10 to-violet-500/10 p-4">
+          <img src="/rendy.jpeg" alt="Rendy" class="object-cover w-full h-full rounded-xl border border-white/10" />
+        </div>
+      </aside>
+    </section>
+  </main>
+</AboutLayout>

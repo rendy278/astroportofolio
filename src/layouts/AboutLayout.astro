@@ -1,0 +1,18 @@
+---
+import Layout from './Layout.astro'
+
+const lang = Astro.props?.lang ?? 'id'
+const title = Astro.props?.title ?? (lang === 'en' ? 'About — Rendev Studio' : 'Tentang — Rendev Studio')
+const description = Astro.props?.description ?? (lang === 'en' ? 'About Rendev Studio' : 'Tentang Rendev Studio')
+
+---
+
+<Layout lang={lang} title={title} description={description} ogTitle={title} ogDescription={description}>
+  <div slot="head">
+    
+  </div>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <slot />
+  </main>
+</Layout>
