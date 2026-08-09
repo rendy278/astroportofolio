@@ -1,5 +1,5 @@
 ---
-import '../../../../public/global.css'
+import '../../public/global.css'
 export const prerender = true
 import LogoWebLoad from '../../public/logo.png'
 
@@ -16,6 +16,7 @@ const fallbackTo = '/id/'
     <!-- Jangan sampai halaman redirect ini yang ke-index, biar target (/id/ atau /en/) yang diindeks -->
     <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href={fallbackTo} />
+    <link rel="icon" href="/logo.png" />
 
     <!-- Fallback untuk browser tanpa JS / crawler lama, kasih delay biar script JS sempat jalan duluan -->
     <meta http-equiv="refresh" content={`2; url=${fallbackTo}`} />
