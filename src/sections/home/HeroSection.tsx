@@ -58,13 +58,13 @@ export const HeroSection = () => {
   }
 
   return (
-    <section className="w-full overflow-hidden flex items-center justify-center relative">
-      <div className="flex flex-col h-fit gap-6 w-full md:w-7xl p-4 py-6 lg:flex-row items-center justify-center lg:justify-between ">
+    <section className="w-full pb-0 md:pb-20 overflow-hidden flex items-center justify-center relative">
+      <div className="flex flex-col  gap-6 w-full md:w-7xl p-4 py-6 lg:flex-row items-center justify-center lg:justify-between ">
         {/* Text Content */}
         <div className="w-full  flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-sky-500 mb-2 sm:mb-3">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-yellow-400 mb-2 sm:mb-3">
             {t.greeting}{' '}
-            <span className="text-info">{t.greetingHighlight}</span>
+            <span className="text-sky-500 ">{t.greetingHighlight}</span>
           </h1>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold flex flex-wrap text-muted-foreground items-center justify-center lg:justify-start gap-2">
@@ -101,7 +101,7 @@ export const HeroSection = () => {
                         transition-all duration-300
                         hover:scale-110
                         hover:bg-yellow-plate
-                        hover:text-white
+                        hover:text-yellow-500
                         hover:shadow-lg hover:shadow-yellow-plate/30
                       "
                 >

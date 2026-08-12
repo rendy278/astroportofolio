@@ -2,10 +2,16 @@
 import Layout from '../../layouts/Layout.astro'
 import {HeroSection} from "../../sections/home/HeroSection"
 import '../../../public/global.css'
+import TestimonialsSection from '@/sections/home/TestimonialsSection'
+import { ServiceSection } from '@/sections/home/ServiceSection'
+import PromisesSection from '@/sections/home/PromisesSection'
 
 
 ---
 
 <Layout lang="en">
   <HeroSection client:load />
+  <ServiceSection client:load/>
+   <PromisesSection client:load />
+  <TestimonialsSection client:load />
 </Layout>
