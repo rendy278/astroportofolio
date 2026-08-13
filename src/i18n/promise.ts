@@ -9,22 +9,22 @@ export const promises = {
       {
         title: 'Kolaborasi yang Profesional',
         description:
-          'Kami menjaga komunikasi tetap terbuka, proses pengerjaan transparan, dan memastikan setiap proyek dikelola dengan penuh tanggung jawab.',
+          'Saya menjaga komunikasi tetap terbuka, proses pengerjaan transparan, dan memastikan setiap proyek dikelola dengan penuh tanggung jawab.',
       },
       {
         title: 'Mitra Teknologi Jangka Panjang',
         description:
-          'Hubungan kami tidak berhenti setelah proyek selesai. WebinStudio siap terus mendukung perkembangan bisnis Anda melalui solusi digital yang berkelanjutan.',
+          'Hubungan Saya tidak berhenti setelah proyek selesai. WebinStudio siap terus mendukung perkembangan bisnis Anda melalui solusi digital yang berkelanjutan.',
       },
       {
         title: 'Solusi yang Tepat untuk Kebutuhan Anda',
         description:
-          'Berbekal pengalaman dalam berbagai proyek digital, kami menghadirkan solusi yang efektif, efisien, dan sesuai dengan kebutuhan bisnis.',
+          'Berbekal pengalaman dalam berbagai proyek digital, saya menghadirkan solusi yang efektif, efisien, dan sesuai dengan kebutuhan bisnis.',
       },
       {
         title: 'Website Andal dengan Dukungan Responsif',
         description:
-          'Kami membangun website yang cepat, aman, mudah dikembangkan, serta didukung layanan yang responsif di setiap tahap pengerjaan.',
+          'Saya membangun website yang cepat, aman, mudah dikembangkan, serta didukung layanan yang responsif di setiap tahap pengerjaan.',
       },
     ],
   },
@@ -44,7 +44,7 @@ export const promises = {
       {
         title: 'Your Long-Term Technology Partner',
         description:
-          'Our commitment goes beyond project delivery. We continue supporting your business with sustainable digital solutions.',
+          'Im commitment goes beyond project delivery. We continue supporting your business with sustainable digital solutions.',
       },
       {
         title: 'Practical Solutions for Real Challenges',

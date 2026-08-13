@@ -80,10 +80,10 @@ export const HeroSection = () => {
           {/* Decorative background */}
           <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-3xl" />
 
-          <div className="relative rounded-3xl border border-border bg-background/80 p-6 shadow-sm backdrop-blur">
+          <div className="relative rounded-3xl border border-slate-300 dark:border-slate-200 p-6 shadow-sm backdrop-blur">
             <div className="grid gap-4 sm:grid-cols-2">
               {/* Card 1 */}
-              <div className="rounded-2xl border border-border bg-muted/30 p-6">
+              <div className="rounded-2xl border border-slate-300 dark:border-slate-200 bg-muted/30 p-6">
                 <p className="text-sm text-muted-foreground">
                   {content.pengalaman}
                 </p>
@@ -94,7 +94,7 @@ export const HeroSection = () => {
               </div>
 
               {/* Card 2 */}
-              <div className="rounded-2xl border border-border bg-muted/30 p-6">
+              <div className="rounded-2xl border border-slate-300 dark:border-slate-200 bg-muted/30 p-6">
                 <p className="text-sm text-muted-foreground">
                   {content.pendekatan}
                 </p>

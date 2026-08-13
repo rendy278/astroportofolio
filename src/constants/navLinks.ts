@@ -1,24 +1,43 @@
+import {
+  IconBook,
+  IconBriefcase,
+  IconEyeDollar,
+  IconHome,
+  IconInfoCircle,
+  IconMail,
+} from '@tabler/icons-react'
+
 export const navLinks = {
   id: [
     {
       key: 'nav.home',
       href: '/',
+      icon: IconHome,
     },
     {
       key: 'nav.about',
       href: '/tentang',
+      icon: IconInfoCircle,
     },
     {
-      key: 'nav.case-studies',
+      key: 'nav.price',
+      href: '/harga',
+      icon: IconEyeDollar,
+    },
+    {
+      key: 'nav.case_studies',
       href: '/studi-kasus',
-    },
-    {
-      key: 'nav.contact',
-      href: '/kontak',
+      icon: IconBriefcase,
     },
     {
       key: 'nav.blog',
       href: '/blog',
+      icon: IconBook,
+    },
+    {
+      key: 'nav.contact',
+      href: '/kontak',
+      icon: IconMail,
     },
   ],
 
@@ -26,22 +45,32 @@ export const navLinks = {
     {
       key: 'nav.home',
       href: '/',
+      icon: IconHome,
     },
     {
       key: 'nav.about',
       href: '/about',
+      icon: IconInfoCircle,
     },
     {
-      key: 'nav.case-studies',
+      key: 'nav.price',
+      href: '/price',
+      icon: IconEyeDollar,
+    },
+    {
+      key: 'nav.case_studies',
       href: '/case-studies',
-    },
-    {
-      key: 'nav.contact',
-      href: '/contact',
+      icon: IconBriefcase,
     },
     {
       key: 'nav.blog',
       href: '/blog',
+      icon: IconBook,
+    },
+    {
+      key: 'nav.contact',
+      href: '/contact',
+      icon: IconMail,
     },
   ],
 } as const

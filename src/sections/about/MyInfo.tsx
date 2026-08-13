@@ -1,4 +1,6 @@
 import { useLangStore } from '@/store/langStore'
+import { clients } from '@/i18n/clients'
+import TestimonialCard from '../../components/TestimonialCard'
 
 const myInfoDeskripsi = {
   id: {
@@ -32,7 +34,9 @@ const myInfoDeskripsi = {
 
 export const MyInfo = () => {
   const lang = useLangStore((state) => state.lang)
+
   const content = myInfoDeskripsi[lang]
+  const testimonials = clients[lang].slice(0, 4)
 
   const paragraphs = [
     content.paragraph1,
@@ -42,9 +46,9 @@ export const MyInfo = () => {
   ]
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-6">
-        {/* Header */}
+    <section className="space-y-10">
+      {/* About */}
+      <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
         <div className="mb-10">
           <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             {lang === 'id' ? 'Tentang Saya' : 'About Me'}
@@ -57,7 +61,6 @@ export const MyInfo = () => {
           </h2>
         </div>
 
-        {/* Paragraphs */}
         <div className="space-y-6">
           {paragraphs.map((paragraph, index) => (
             <p
@@ -66,6 +69,27 @@ export const MyInfo = () => {
             >
               {paragraph}
             </p>
+          ))}
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
+        <div className="mb-6">
+          <span className=" text-3xl font-bold uppercase tracking-wider ">
+            {lang === 'id' ? 'Kata Klien' : 'Client Testimonials'}
+          </span>
+
+          <h2 className="mt-3 text-md tracking-tight text-muted-foreground">
+            {lang === 'id'
+              ? 'Saya lebih mengutamakan pembuktian melalui rekam jejak dan kepuasan klien daripada sekadar janji manis.'
+              : 'I prioritize proven track records and client satisfaction over mere promises.'}
+          </h2>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {testimonials.map((client) => (
+            <TestimonialCard key={client.nama} client={client} />
           ))}
         </div>
       </div>

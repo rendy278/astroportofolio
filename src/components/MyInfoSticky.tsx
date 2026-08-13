@@ -64,14 +64,14 @@ export const MyInfoSticky = () => {
   const content = info[lang]
 
   return (
-    <aside className="w-full lg:sticky lg:top-24 lg:self-start">
-      <div className="overflow-hidden rounded-3xl border border-border bg-background shadow-sm">
+    <aside className="block lg:sticky lg:top-24 lg:self-start">
+      <div className="overflow-hidden block md:flex lg:block rounded-3xl border border-border shadow-sm">
         {/* Profile */}
         <div className="relative">
           <img
             src={content.image.src}
             alt={content.name}
-            className="h-60 w-full object-cover object-center"
+            className="lg:h-60 h-full w-full md:w-60 lg:w-full object-cover object-center"
           />
 
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6 pt-20">

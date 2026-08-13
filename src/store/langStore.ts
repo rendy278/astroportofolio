@@ -15,110 +15,175 @@ interface LangState {
   toggleLang: () => void
 }
 
-export const useLangStore = create<LangState>((set) => {
-  const storedLang =
-    typeof window !== 'undefined' ? window.localStorage.getItem('lang') : null
-  const urlLang =
-    typeof window !== 'undefined'
-      ? getLangFromUrl(window.location.pathname)
-      : null
+const SCROLL_STORAGE_KEY = 'lang-scroll-y'
 
-  const initialLang = ((): LangKey => {
-    if (urlLang && urlLang in ui) return urlLang as LangKey
-    if (storedLang && storedLang in ui) return storedLang as LangKey
+const normalizePath = (path: string) => {
+  return path.replace(/^\/+/g, '').replace(/\/+$/g, '')
+}
+
+const saveScrollPosition = () => {
+  if (typeof window === 'undefined') return
+
+  sessionStorage.setItem(SCROLL_STORAGE_KEY, String(window.scrollY))
+}
+
+const restoreScrollPosition = () => {
+  if (typeof window === 'undefined') return
+
+  const savedScrollY = sessionStorage.getItem(SCROLL_STORAGE_KEY)
+
+  if (savedScrollY === null) return
+
+  const scrollY = Number(savedScrollY)
+
+  if (Number.isNaN(scrollY)) {
+    sessionStorage.removeItem(SCROLL_STORAGE_KEY)
+    return
+  }
+
+  const restore = () => {
+    window.scrollTo({
+      top: scrollY,
+      behavior: 'instant',
+    })
+
+    sessionStorage.removeItem(SCROLL_STORAGE_KEY)
+  }
+
+  // Tunggu sampai layout halaman selesai dirender.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(restore)
+  })
+}
+
+const getInitialLang = (): LangKey => {
+  if (typeof window === 'undefined') {
     return defaultLang
-  })()
+  }
+
+  const urlLang = getLangFromUrl(window.location.pathname)
+
+  if (urlLang && urlLang in ui) {
+    return urlLang as LangKey
+  }
+
+  const storedLang = window.localStorage.getItem('lang')
+
+  if (storedLang && storedLang in ui) {
+    return storedLang as LangKey
+  }
+
+  return defaultLang
+}
+
+const getTranslatedPath = (
+  pathWithoutLang: string,
+  fromLang: LangKey,
+  toLang: LangKey,
+) => {
+  const needle = normalizePath(pathWithoutLang)
+
+  const fromList = navLinks[fromLang]
+  const toList = navLinks[toLang]
+
+  const index = fromList.findIndex(
+    (item) => normalizePath(item.href) === needle,
+  )
+
+  if (index >= 0 || toList[index]) {
+    return toList[index].href
+  }
+
+  return pathWithoutLang
+}
+
+const navigateToLanguage = (currentLang: LangKey, targetLang: LangKey) => {
+  if (typeof window === 'undefined') return
+
+  const currentPath = window.location.pathname
+  const currentWithoutLang = getPathWithoutLang(currentPath)
+
+  const targetSegment = getTranslatedPath(
+    currentWithoutLang,
+    currentLang,
+    targetLang,
+  )
+
+  const nextPath = getLocalizedPath(targetSegment, targetLang)
+
+  window.localStorage.setItem('lang', targetLang)
+
+  if (currentPath === nextPath) {
+    return
+  }
+
+  // Simpan posisi scroll sebelum berpindah halaman.
+  saveScrollPosition()
+
+  window.location.assign(nextPath)
+}
+
+export const useLangStore = create<LangState>((set) => {
+  const initialLang = getInitialLang()
 
   if (typeof window !== 'undefined') {
     const currentPath = window.location.pathname
+
     const normalizedPath = getLocalizedPath(
       getPathWithoutLang(currentPath),
       initialLang,
     )
 
-    // If the URL has no language prefix, add it without full reload so the
-    // initial page reflects the chosen language. If the URL already contains
-    // a language (from navigation), keep it as-is.
+    /*
+     * Jika URL belum mempunyai prefix bahasa,
+     * tambahkan prefix tanpa melakukan full reload.
+     */
     if (currentPath !== normalizedPath) {
       window.history.replaceState({}, '', normalizedPath)
+    }
+
+    /*
+     * Restore posisi scroll setelah halaman baru selesai dimuat.
+     */
+    if (sessionStorage.getItem(SCROLL_STORAGE_KEY) !== null) {
+      if (document.readyState === 'complete') {
+        restoreScrollPosition()
+      } else {
+        window.addEventListener('load', restoreScrollPosition, { once: true })
+      }
     }
   }
 
   return {
     lang: initialLang,
+
     setLang: (lang) => {
       if (!(lang in ui)) return
 
       if (typeof window !== 'undefined') {
-        const fromLang = getLangFromUrl(window.location.pathname) || initialLang
-        const currentWithout = getPathWithoutLang(window.location.pathname)
+        const currentLang =
+          getLangFromUrl(window.location.pathname) || initialLang
 
-        // Map the current page to the corresponding href in the target language
-        const mapPathBetweenLangs = (
-          pathWithoutLang: string,
-          fromL: keyof typeof navLinks,
-          toL: keyof typeof navLinks,
-        ) => {
-          const normalize = (p: string) =>
-            p.replace(/^\/+/g, '').replace(/\/+$/g, '')
-          const needle = normalize(pathWithoutLang)
-          const fromList = navLinks[fromL]
-          const toList = navLinks[toL]
-
-          // find matching index by href (normalized)
-          const idx = fromList.findIndex((it) => normalize(it.href) === needle)
-          if (idx >= 0 && toList[idx]) return toList[idx].href
-
-          // fallback: try to use same path segment
-          return pathWithoutLang
-        }
-
-        const targetSegment = mapPathBetweenLangs(
-          currentWithout,
-          fromLang as any,
-          lang as any,
-        )
-        const nextPath = getLocalizedPath(targetSegment, lang)
-
-        window.localStorage.setItem('lang', lang)
-
-        if (window.location.pathname !== nextPath) {
-          window.location.assign(nextPath)
-          return
-        }
+        navigateToLanguage(currentLang as LangKey, lang)
       }
 
       set({ lang })
     },
+
     toggleLang: () => {
       set((state) => {
         const nextLang: LangKey = state.lang === 'en' ? 'id' : 'en'
 
         if (typeof window !== 'undefined') {
-          const fromLang =
+          const currentLang =
             getLangFromUrl(window.location.pathname) || state.lang
-          const currentWithout = getPathWithoutLang(window.location.pathname)
 
-          const normalize = (p: string) =>
-            p.replace(/^\/+/g, '').replace(/\/+$/g, '')
-          const needle = normalize(currentWithout)
-          const fromList = navLinks[fromLang as keyof typeof navLinks]
-          const toList = navLinks[nextLang as keyof typeof navLinks]
-          const idx = fromList.findIndex((it) => normalize(it.href) === needle)
-
-          const targetSegment =
-            idx >= 0 && toList[idx] ? toList[idx].href : currentWithout
-          const nextPath = getLocalizedPath(targetSegment, nextLang)
-
-          window.localStorage.setItem('lang', nextLang)
-
-          if (window.location.pathname !== nextPath) {
-            window.location.assign(nextPath)
-            return { lang: nextLang }
-          }
+          navigateToLanguage(currentLang as LangKey, nextLang)
         }
 
-        return { lang: nextLang }
+        return {
+          lang: nextLang,
+        }
       })
     },
   }

@@ -1,15 +1,6 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  IconBook,
-  IconBriefcase,
-  IconChevronRight,
-  IconHome,
-  IconInfoCircle,
-  IconMail,
-  IconMenu2,
-  IconX,
-} from '@tabler/icons-react'
+import { IconChevronRight, IconMenu2, IconX } from '@tabler/icons-react'
 import { navLinks } from '../constants/navLinks'
 import { getLocalizedPath, useTranslations } from '../i18n/utils'
 import { useLangStore } from '../store/langStore'
@@ -36,20 +27,13 @@ export default function Navbar(props: NavbarProps) {
   const t = useMemo(() => useTranslations(lang), [lang])
   const [isOpen, setIsOpen] = useState(false)
   const links = navLinks[lang]
-  const navIcons = {
-    'nav.home': IconHome,
-    'nav.about': IconInfoCircle,
-    'nav.case-studies': IconBriefcase,
-    'nav.blog': IconBook,
-    'nav.contact': IconMail,
-  } as const
   return (
     <header className="sticky top-0 z-50">
       <nav className="m-0 md:my-2 mx-auto flex max-w-7xl rounded-none lg:rounded-full bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-xl backdrop-saturation-150 items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <Logo />
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
             <a
               key={link.key}
@@ -74,7 +58,7 @@ export default function Navbar(props: NavbarProps) {
             onClick={() => setIsOpen((prev) => !prev)}
             aria-expanded={isOpen}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-700 md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-700 lg:hidden"
           >
             {isOpen ? (
               <IconX size={20} className="text-slate-700 dark:text-slate-100" />
@@ -95,7 +79,7 @@ export default function Navbar(props: NavbarProps) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="overflow-hidden border-t border-slate-200 dark:border-slate-700 bg-sky-50/95 dark:bg-slate-700 rounded-b-2xl md:hidden"
+            className="overflow-hidden border-t border-slate-200 dark:border-slate-700 bg-sky-50/95 dark:bg-slate-700 rounded-b-2xl lg:hidden"
           >
             <motion.div
               initial="closed"
@@ -118,7 +102,7 @@ export default function Navbar(props: NavbarProps) {
               className="space-y-2 px-4 pb-5 pt-4"
             >
               {links.map((link) => {
-                const Icon = navIcons[link.key as keyof typeof navIcons]
+                const Icon = link.icon
                 return (
                   <motion.a
                     key={link.key}
