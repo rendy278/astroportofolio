@@ -32,7 +32,7 @@ const myInfoDeskripsi = {
   },
 }
 
-export const MyInfo = () => {
+export const MyInfoSection = () => {
   const lang = useLangStore((state) => state.lang)
 
   const content = myInfoDeskripsi[lang]
@@ -50,15 +50,15 @@ export const MyInfo = () => {
       {/* About */}
       <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
         <div className="mb-10">
-          <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+          <h1 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             {lang === 'id' ? 'Tentang Saya' : 'About Me'}
-          </span>
+          </h1>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          <p className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
             {lang === 'id'
               ? 'Membangun website dengan tujuan yang jelas.'
               : 'Building websites with a clear purpose.'}
-          </h2>
+          </p>
         </div>
 
         <div className="space-y-6">
@@ -76,15 +76,15 @@ export const MyInfo = () => {
       {/* Testimonials */}
       <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
         <div className="mb-6">
-          <span className=" text-3xl font-bold uppercase tracking-wider ">
+          <h1 className=" text-3xl font-bold uppercase tracking-wider ">
             {lang === 'id' ? 'Kata Klien' : 'Client Testimonials'}
-          </span>
+          </h1>
 
-          <h2 className="mt-3 text-md tracking-tight text-muted-foreground">
+          <p className="mt-3 text-md tracking-tight text-muted-foreground">
             {lang === 'id'
               ? 'Saya lebih mengutamakan pembuktian melalui rekam jejak dan kepuasan klien daripada sekadar janji manis.'
               : 'I prioritize proven track records and client satisfaction over mere promises.'}
-          </h2>
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">

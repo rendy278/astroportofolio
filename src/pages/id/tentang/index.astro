@@ -3,13 +3,17 @@ import AboutLayout from '../../../layouts/AboutLayout.astro'
 import '../../../../public/global.css'
 import { HeroSection } from '@/sections/about/HeroSection'
 import { MyInfoSticky } from '@/components/MyInfoSticky'
-import { MyInfo } from '@/sections/about/MyInfo'
+import {  MyInfoSection } from '@/sections/about/MyInfoSections'
+import { MyHandlingSection } from '@/sections/about/MyHandlingSection'
 ---
 
 <AboutLayout lang="id">
  <HeroSection client:load/>
  <div class="mx-auto grid md:grid-cols-1 py-6 w-full lg:grid-cols-[320px_1fr] gap-12 px-6 md:px-8">
   <MyInfoSticky client:load/>
-  <MyInfo client:load/>
+  <div class="space-y-10">
+    <MyInfoSection client:load/>
+    <MyHandlingSection client:load/>
+  </div>
  </div>
 </AboutLayout>
