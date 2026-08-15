@@ -2,6 +2,8 @@ import Fukuno from '../assets/clients/fukuno.png'
 import Vocasia from '../assets/clients/vocasia.png'
 import Golan from '../assets/clients/golan.png'
 import Chunryang from '../assets/clients/cheonliang.png'
+import VocasiaDark from '../assets/clients/vocasiadark.png'
+import { useThemeStore } from '@/store/themeStore'
 
 export const clients = {
   id: [
@@ -13,7 +15,7 @@ export const clients = {
       rating: 5,
     },
     {
-      image: Vocasia,
+      image: useThemeStore.getState().theme === 'dark' ? VocasiaDark : Vocasia,
       nama: 'Vocasia',
       deskripsi:
         'Maintenance website sangat baik. Website lebih cepat, aman, dan fitur baru dikerjakan dengan cepat.',
@@ -61,7 +63,7 @@ export const clients = {
       rating: 5,
     },
     {
-      image: Vocasia,
+      image: useThemeStore.getState().theme === 'dark' ? VocasiaDark : Vocasia,
       nama: 'Vocasia',
       deskripsi:
         'Great website maintenance. Faster, more secure, and quick feature updates.',

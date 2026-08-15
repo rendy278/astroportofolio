@@ -1,4 +1,8 @@
 import { IconStar, IconUser } from '@tabler/icons-react'
+import { useThemeStore } from '@/store/themeStore'
+
+import Vocasia from '../assets/clients/vocasia.png'
+import VocasiaDark from '../assets/clients/vocasiadark.png'
 
 type ClientTestimonial = {
   nama: string
@@ -9,6 +13,7 @@ type ClientTestimonial = {
 
 function getImageSrc(image?: string | { src: string }) {
   if (!image) return undefined
+
   return typeof image === 'string' ? image : image.src
 }
 
@@ -17,7 +22,14 @@ export default function TestimonialCard({
 }: {
   client: ClientTestimonial
 }) {
-  const imageSrc = getImageSrc(client.image)
+  const theme = useThemeStore((state) => state.theme)
+
+  const imageSrc =
+    client.nama === 'Vocasia'
+      ? theme === 'dark'
+        ? getImageSrc(VocasiaDark)
+        : getImageSrc(Vocasia)
+      : getImageSrc(client.image)
 
   return (
     <article
@@ -122,7 +134,6 @@ export default function TestimonialCard({
           text-[15px]
           leading-7
           text-slate-600
-
           dark:text-slate-300
         "
       >
