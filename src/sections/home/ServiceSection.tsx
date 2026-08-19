@@ -163,7 +163,7 @@ export const ServiceSection = () => {
                     dark:border-sky-500
                   "
                 />
-                .{/* Icon */}
+
                 <div
                   className="
                     mt-6

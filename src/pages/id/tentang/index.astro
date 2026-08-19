@@ -5,6 +5,10 @@ import { HeroSection } from '@/sections/about/HeroSection'
 import { MyInfoSticky } from '@/components/MyInfoSticky'
 import {  MyInfoSection } from '@/sections/about/MyInfoSections'
 import { MyHandlingSection } from '@/sections/about/MyHandlingSection'
+import { WhyChoseMe } from '@/sections/about/WhyChoseMe'
+import { MyMethodWork } from '@/sections/about/MyMethodWork'
+import { SuitableCollab } from '@/sections/about/SuitableCollab'
+import {MyTechnologies} from "@/sections/about/MyTechnologies"
 ---
 
 <AboutLayout lang="id">
@@ -13,7 +17,11 @@ import { MyHandlingSection } from '@/sections/about/MyHandlingSection'
   <MyInfoSticky client:load/>
   <div class="space-y-10">
     <MyInfoSection client:load/>
+    <WhyChoseMe client:load />
     <MyHandlingSection client:load/>
+    <MyMethodWork client:load/>
+    <SuitableCollab client:load />
+    <MyTechnologies client:load />
   </div>
  </div>
 </AboutLayout>

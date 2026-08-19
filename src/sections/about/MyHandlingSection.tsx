@@ -8,7 +8,7 @@ export const MyHandlingSection = () => {
   return (
     <section className="mx-auto w-full lg:w-4xl py-6 md:py-10 px-0 md:px-6">
       <div className="mb-4 ">
-        <h1 className="text-3xl font-bold uppercase tracking-wider">
+        <h1 className="text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
           {lang === 'id' ? 'Saya menangani' : 'What I Handle'}
         </h1>
 

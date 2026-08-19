@@ -46,9 +46,9 @@ export const MyInfoSection = () => {
   ]
 
   return (
-    <section className="space-y-10">
+    <section className="">
       {/* About */}
-      <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
+      <div className="mx-auto w-full lg:w-4xl py-6 md:py-10  px-0 md:px-6">
         <div className="mb-10">
           <h1 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             {lang === 'id' ? 'Tentang Saya' : 'About Me'}
@@ -74,7 +74,7 @@ export const MyInfoSection = () => {
       </div>
 
       {/* Testimonials */}
-      <div className="mx-auto w-full lg:w-4xl px-0 md:px-6">
+      <div className="mx-auto w-full lg:w-4xl py-6 md:py-10  px-0 md:px-6">
         <div className="mb-6">
           <h1 className=" text-3xl font-bold uppercase tracking-wider ">
             {lang === 'id' ? 'Kata Klien' : 'Client Testimonials'}
